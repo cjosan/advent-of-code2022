@@ -18,15 +18,13 @@ fun main() {
     fun part2(input: List<String>): Int {
         return input
             .chunked(3) {
-                val (first, second, third) = it.map { elf ->
+                it.map { elf ->
                     elf.toSet()
-                }
-
-                (first intersect second intersect third)
-                    .single()
-                    .toPriority()
+                }.let { (first, second, third) ->
+                    first intersect second intersect third
+                }.single().toPriority()
             }
-            .reduce { acc, group -> acc + group }
+            .sum()
     }
 
     // test if implementation meets criteria from the description, like:
